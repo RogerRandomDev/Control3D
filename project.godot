@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "Node3D",
+"class": &"Control3D",
+"language": &"GDScript",
+"path": "res://addons/ScreenView3D/Nodes/Control3D.gd"
+}, {
+"base": "Control3D",
+"class": &"ControlBox3D",
+"language": &"GDScript",
+"path": "res://addons/ScreenView3D/Nodes/ControlBox3D.gd"
+}, {
+"base": "Control3D",
+"class": &"ControlSphere3D",
+"language": &"GDScript",
+"path": "res://addons/ScreenView3D/Nodes/ControlSphere3D.gd"
+}]
+_global_script_class_icons={
+"Control3D": "",
+"ControlBox3D": "",
+"ControlSphere3D": ""
+}
+
+[application]
+
+config/name="3donscreen"
+run/main_scene="res://addons/ScreenView3D/example/test_scene.tscn"
+config/features=PackedStringArray("4.0", "Vulkan Clustered")
+config/icon="res://icon.svg"
+
+[autoload]
+
+ScreenView="*res://addons/ScreenView3D/root.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ScreenView3D/plugin.cfg")
