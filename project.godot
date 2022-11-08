@@ -9,38 +9,38 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Object",
+"class": &"CameraEvent3D",
+"language": &"GDScript",
+"path": "res://addons/Control3D/resources/InputEventCameraMoved.gd"
+}, {
 "base": "Node3D",
 "class": &"Control3D",
 "language": &"GDScript",
-"path": "res://addons/ScreenView3D/Nodes/Control3D.gd"
+"path": "res://addons/Control3D/Nodes/Control3D.gd"
 }, {
-"base": "Control3D",
-"class": &"ControlBox3D",
+"base": "RefCounted",
+"class": &"InputEventMouse3D",
 "language": &"GDScript",
-"path": "res://addons/ScreenView3D/Nodes/ControlBox3D.gd"
-}, {
-"base": "Control3D",
-"class": &"ControlSphere3D",
-"language": &"GDScript",
-"path": "res://addons/ScreenView3D/Nodes/ControlSphere3D.gd"
+"path": "res://addons/Control3D/resources/InputEventMouse3D.gd"
 }]
 _global_script_class_icons={
+"CameraEvent3D": "",
 "Control3D": "",
-"ControlBox3D": "",
-"ControlSphere3D": ""
+"InputEventMouse3D": ""
 }
 
 [application]
 
 config/name="3donscreen"
-run/main_scene="res://addons/ScreenView3D/example/test_scene.tscn"
+run/main_scene="res://addons/Control3D/example/test_scene.tscn"
 config/features=PackedStringArray("4.0", "Vulkan Clustered")
 config/icon="res://icon.svg"
 
 [autoload]
 
-ScreenView="*res://addons/ScreenView3D/root.gd"
+ScreenView="*res://addons/Control3D/root.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ScreenView3D/plugin.cfg")
+enabled=PackedStringArray("res://addons/Control3D/plugin.cfg")

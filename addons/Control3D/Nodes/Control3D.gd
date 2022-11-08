@@ -15,21 +15,38 @@ signal cameraUpdate(dict)
 var inCamera:bool=false
 var inMouse:bool=false
 #most used for the editor view
-var checkMesh:MeshInstance3D=null
-const mat=preload("res://addons/ScreenView3D/checkAreaMat.tres")
-var checkCollision:CollisionShape3D=CollisionShape3D.new()
-var body:StaticBody3D=null
+var checkMesh:MeshInstance3D
+
+const mat=preload("res://addons/Control3D/checkAreaMat.tres")
+var checkCollision:=CollisionShape3D.new()
+@export var shape:Shape3D:
+	set(value):
+		shape=value
+		updateControl(value)
+		value.connect('changed',updateControl)
+	get:return shape
+
+var body:=StaticBody3D.new()
 #creates the shape for collision
 func createShape():pass
 
-
-
+#updates the check shape and the debug collision mesh
+func updateControl(newShape:Shape3D=null)->void:
+	if newShape==null:newShape=shape
+	checkCollision.shape=newShape
+	var m=newShape.get_debug_mesh()
+	checkMesh.mesh=m
+	
+	
 
 func _init()->void:
+	
 	checkMesh=MeshInstance3D.new()
-	body=StaticBody3D.new()
 	body.collision_layer=ScreenView.mouseLayer
 	body.collision_mask=0
+	body.add_child(checkCollision)
+	
+	add_child(body)
 	createShape()
 	connectSignals()
 
@@ -37,10 +54,10 @@ func _init()->void:
 func connectSignals()->void:
 	ScreenView.connect("updatedMouseFocus",updateMouseFocus)
 	ScreenView.connect("updatedScreenFocus",updateScreenFocus)
+	ScreenView.connect("toggleFocusBoxVisible",func(toggled):checkMesh.visible=toggled)
 
 func _ready()->void:
-	add_child(body)
-	ScreenView.connect("toggleFocusBoxVisible",func(toggled):checkMesh.visible=toggled)
+	if shape!=null:updateControl()
 	add_child(checkMesh);checkMesh.visible=Engine.is_editor_hint()
 	
 
@@ -71,28 +88,20 @@ func _input(event):
 
 #updates based on center point of the camera
 func updateCamera():
-	var eventData={
-		'event':"cameraMoved",
-		'node':self,
-		'position':ScreenView.getOnScreen(global_position),
-		'center':ScreenView.getViewCenter()
-		}
-	eventData["offset"]=eventData.position-eventData.center
-	if lastPos!=eventData.position:emit_signal("cameraUpdate",eventData)
-	lastPos=eventData.position
+	var cameraEvent=CameraEvent3D.new()
+	cameraEvent.build(
+		self,
+		ScreenView.getOnScreen(global_position),
+		ScreenView.getViewCenter()
+	)
+	if lastPos!=cameraEvent.position:emit_signal("cameraUpdate",cameraEvent)
+	lastPos=cameraEvent.position
 
 #updates the mouse motion using mouse events
 func updateMouse(event):
-	
-	var eventData={
-		'event':event.get_class(),
-		'node':self,
-		'relative':event.get("relative"),
-		'pressed':event.get("pressed"),
-		'position':event.get("position"),
-		"button_mask":event.get("button_mask")
-		}
-	emit_signal("mouseUpdate",eventData)
+	var mouseEvent=InputEventMouse3D.new()
+	mouseEvent.build(self,event)
+	emit_signal("mouseUpdate",mouseEvent)
 
 
 

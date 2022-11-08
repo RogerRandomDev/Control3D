@@ -21,18 +21,10 @@ func updateChild(child):
 		)
 
 func updateCameraMove(event):
-	$Label2.text="node: %s
-	position: %s
-	center: %s
-	offset: %s
-	event: %s"%[event.node.name,event.position,event.center,event.offset,event.event]
+	$Label2.text=event.get_debug()
+	
 func updateMouseMove(event):
-	$Label2.text="node: %s
-	position: %s
-	relative: %s
-	button_mask: %s
-	pressed: %s
-	event: %s"%[event.node.name,event.position,event.relative,event.button_mask,event.pressed,event.event]
+	$Label2.text=event.get_debug()
 
 
 func _on_check_box_toggled(button_pressed):
