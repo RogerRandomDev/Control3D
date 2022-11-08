@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://yext6ybpr2nn"]
+[gd_scene load_steps=8 format=3 uid="uid://yext6ybpr2nn"]
 
 [ext_resource type="Script" path="res://addons/Control3D/example/test_scene.gd" id="1_j027h"]
 [ext_resource type="Script" path="res://addons/Control3D/example/Camera3d.gd" id="2_yk84g"]
@@ -8,6 +8,17 @@
 margin = 0.001
 radius = 0.465
 height = 1.89
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6argk"]
+radius = 0.674
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b0u5p"]
+custom_solver_bias = 0.009
+height = 2.11
+radius = 0.494
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c5t6l"]
+size = Vector3(1.694, 1.948, 1.697)
 
 [node name="testScene" type="Node3D"]
 script = ExtResource("1_j027h")
@@ -19,6 +30,42 @@ shape = SubResource("CapsuleShape3D_m3lny")
 
 [node name="Label3d" type="Label3D" parent="Control3D"]
 transform = Transform3D(-0.00272266, 0, 0.999996, 0, 1, 0, -0.999996, 0, -0.00272266, 0, 1.788, 0)
+text = "a"
+
+[node name="Control3D3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24902, 0, -2.26618)
+script = ExtResource("5_n1htb")
+shape = SubResource("SphereShape3D_6argk")
+
+[node name="Label3d" type="Label3D" parent="Control3D3"]
+transform = Transform3D(-0.00272266, 0, 0.999996, 0, 1, 0, -0.999996, 0, -0.00272266, 0, 1.788, 0)
+text = "a"
+
+[node name="Control3D4" type="Node3D" parent="."]
+transform = Transform3D(0.259707, 0.212178, -0.94209, -0.0563879, 0.977231, 0.204548, 0.96404, 0, 0.265758, 2.8092, 0.293052, -3.81335)
+script = ExtResource("5_n1htb")
+shape = SubResource("CylinderShape3D_b0u5p")
+
+[node name="Label3d" type="Label3D" parent="Control3D4"]
+transform = Transform3D(-0.00272266, 0, 0.999996, 0, 1, 0, -0.999996, 0, -0.00272266, 0, 1.788, 0)
+text = "a"
+
+[node name="Control3D5" type="Node3D" parent="."]
+transform = Transform3D(0.921854, -0.0277168, 0.386546, -0.0563879, 0.977231, 0.204548, -0.383414, -0.21036, 0.899301, 3.778, -0.30205, 2.99126)
+script = ExtResource("5_n1htb")
+shape = SubResource("BoxShape3D_c5t6l")
+
+[node name="Label3d" type="Label3D" parent="Control3D5"]
+transform = Transform3D(-0.796224, -0.190781, 0.574134, -0.131491, 0.980865, 0.143579, -0.59054, 0.0388278, -0.806074, 0, 1.788, 2.98023e-08)
+text = "a"
+
+[node name="Control3D2" type="Node3D" parent="."]
+transform = Transform3D(0.672639, -0.704267, -0.22708, 0.727747, 0.57406, 0.375286, -0.133944, -0.417689, 0.898663, 1.8808, 0, 1.797)
+script = ExtResource("5_n1htb")
+shape = SubResource("CapsuleShape3D_m3lny")
+
+[node name="Label3d" type="Label3D" parent="Control3D2"]
+transform = Transform3D(-0.528001, 0.727747, 0.43772, 0.818168, 0.57406, 0.0324955, -0.227628, 0.375286, -0.898524, 0.780261, 0.615484, 0.402366)
 text = "a"
 
 [node name="Camera3d" type="Camera3D" parent="."]
